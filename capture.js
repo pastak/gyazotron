@@ -4,6 +4,10 @@ const desktopCapturer = require('electron').desktopCapturer
 
 const video = document.querySelector('#video')
 
+function uploadGyazo (dataUrl) {
+  // TODO
+}
+
 function getImage (callback) {
   const canvas = document.createElement('canvas')
   const context = canvas.getContext('2d')
@@ -40,6 +44,7 @@ function gotStream(stream) {
       img.src = url
       img.id = 'preview'
       document.body.appendChild(img)
+      uploadGyazo(url)
       window.setTimeout(function(){img.remove()}, 5000)
     })
   }
@@ -50,6 +55,4 @@ function getUserMediaError(e) {
   console.log('getUserMediaError')
 }
 
-module.exports = function () {
-  GyazoDesktop()
-}
+module.exports = GyazoDesktop
