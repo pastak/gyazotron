@@ -2,6 +2,7 @@
 
 const domready = require('domready')
 const React = require('react')
+let capture = null
 
 function createRect (a, b) {
   return {
@@ -49,6 +50,7 @@ const App = React.createClass({
       onMouseUp: function (e) {
         console.log(JSON.stringify(self.state.rect))
         self.setState({ cropping: false, rect: {} })
+        capture()
       },
       onMouseDown: function (e) {
         self.setState({ downPoint: { x: e.clientX, y: e.clientY }, cropping: true })
@@ -74,5 +76,6 @@ const App = React.createClass({
 })
 
 domready(function () {
-  React.render(React.createFactory(App)(), document.querySelector('body'))
+  React.render(React.createFactory(App)(), document.querySelector('#app'))
+  capture = require('./capture')
 })
